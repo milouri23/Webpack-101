@@ -1,16 +1,18 @@
-# Using a Configuration
+# NPM Scripts
 
-Most projects will need a more complex setup, which is why webpack supports a [configuration file](https://webpack.js.org/concepts/configuration). This is much more efficient than having to type in a lot of commands in the terminal, so let's create one to replace the CLI options used above:
+Given it's not particularly fun to run a local copy of webpack from the CLI, we can set up a little shortcut. Let's adjust our package.json by adding an [npm script](https://docs.npmjs.com/misc/scripts).
 
 ## How to use
-Now, let's run the build again but instead using our new configuration:
+Now the `npm run build` command can be used in place of the `npx` command we used earlier. Note that within `scripts` we can reference locally installed npm packages by name the same way we did with `npx`. This convention is the standard in most npm-based projects because it allows all contributors to use the same set of common scripts (each with flags like `--config` if necessary).
+
+Now run the following command and see if your script alias works:
 
 ```console
-npx webpack --config webpack.config.js
+npm run build
 
 Hash: 857f878815ce63ad5b4f
 Version: webpack 3.9.1
-Time: 298ms
+Time: 294ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
    [0] ./src/index.js 222 bytes {0} [built]
@@ -19,6 +21,4 @@ bundle.js  544 kB       0  [emitted]  [big]  main
     + 1 hidden module
 ```
 
-> Note that when calling `webpack` via its path on windows, you must use backslashes instead, e.g. `node_modules\.bin\webpack --config webpack.config.js`.
-
-A configuration file allows far more flexibility than simple CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the [configuration documentation](https://webpack.js.org/configuration) to learn more.
+> Custom parameters can be passed to webpack by adding two dashes between the npm run build command and your parameters, e.g. `npm run build -- --colors`.
