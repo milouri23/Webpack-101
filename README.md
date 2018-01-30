@@ -1,11 +1,8 @@
-# Basic Setup
+# Creating a bundle
 
-In this example, there are implicit dependencies between the `<script>` tags. Our `index.js` file depends on lodash being included in the page before it runs. This is because `index.js` never declared a need for lodash; it just assumes that the global variable `_` exists.
+In this setup, `index.js` explicitly requires `lodash` to be present, and bind it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
 
-There are problems with managing JavaScript projects this way:
+## How to use
+With that said, let's run `npx webpack` with our script as the [entry point](https://webpack.js.org/concepts/entry-points/) and `bundle.js` as the [output](https://webpack.js.org/concepts/output). The `npx` command, which ships with Node 8.2 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning.
 
-* It is not inmediately apparent that the script depends on a external library.
-* If a dependency is missing, or included in the wrong order, the application will not function properly.
-* If a dependency is included but not used, the browser will be forced to download unnecesary code.
-
-Let's use webpack to manage these scripts instead.
+Open `index.html` in your browser and, if everything went right, you should see the following: 'Hello webpack'.
