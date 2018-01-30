@@ -1,16 +1,16 @@
-# Creating a bundle
+# Using a Configuration
 
-In this setup, `index.js` explicitly requires `lodash` to be present, and bind it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
+Most projects will need a more complex setup, which is why webpack supports a [configuration file](https://webpack.js.org/concepts/configuration). This is much more efficient than having to type in a lot of commands in the terminal, so let's create one to replace the CLI options used above:
 
 ## How to use
-With that said, let's run `npx webpack` with our script as the [entry point](https://webpack.js.org/concepts/entry-points/) and `bundle.js` as the [output](https://webpack.js.org/concepts/output). The `npx` command, which ships with Node 8.2 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning.
+Now, let's run the build again but instead using our new configuration:
 
 ```console
-npx webpack src/index.js dist/bundle.js
+npx webpack --config webpack.config.js
 
 Hash: 857f878815ce63ad5b4f
 Version: webpack 3.9.1
-Time: 332ms
+Time: 298ms
     Asset    Size  Chunks                    Chunk Names
 bundle.js  544 kB       0  [emitted]  [big]  main
    [0] ./src/index.js 222 bytes {0} [built]
@@ -19,4 +19,6 @@ bundle.js  544 kB       0  [emitted]  [big]  main
     + 1 hidden module
 ```
 
-Open `index.html` in your browser and, if everything went right, you should see the following: 'Hello webpack'.
+> Note that when calling `webpack` via its path on windows, you must use backslashes instead, e.g. `node_modules\.bin\webpack --config webpack.config.js`.
+
+A configuration file allows far more flexibility than simple CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the [configuration documentation](https://webpack.js.org/configuration) to learn more.
